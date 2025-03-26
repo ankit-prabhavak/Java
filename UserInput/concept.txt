@@ -1,0 +1,25 @@
+In order to use the object of Scanner, we need to import it first.
+We can do this by adding the following line at the top of our code:
+java
+import java.util.Scanner;
+
+various types of input methods
+There are several types of input methods that can be used in Java, including:
+1. Scanner class: This is the most commonly used method for getting user input in Java. It
+allows us to read input from the user and store it in a variable.
+2. BufferedReader class: This class is used to read input from a character stream, such as a
+file or the console.
+3. InputStreamReader class: This class is used to read input from a byte stream, such as a
+file or a network connection.
+4. Console class: This class is used to read input from the console.
+The Scanner class is the most commonly used method for getting user input in Java. It allows us to
+read input from the user and store it in a variable. Here is an example of how to us
+e the Scanner class to get user input:
+java
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your name:");
+        String name = scanner.nextLine();
+        System.out.println("Hello, " + name + "!");

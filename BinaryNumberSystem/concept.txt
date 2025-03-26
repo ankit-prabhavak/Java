@@ -1,0 +1,14 @@
+You are already aware of the fact that how we convert a decimal number to binary number.
+We can convert a binary number to decimal number by using the following method:
+
+Let the binary number be: 1011
+We can write it as: (1 × 2^3) + (0 × 2^2 ) + (1 × 2^1) + (1 × 2^0) = 8 + 0 + 2 + 1 = 11
+
+Let the decimal number be: 11
+
+
+
+Also know the concept of
+    1. Binary addition
+    2. Binary subtraction
+
