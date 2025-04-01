@@ -27,7 +27,17 @@ public class loops {
             k++;
         } while (k <= 10);
         System.out.println(); // New line after the loop
+
+
+        // Nested loop to print a multiplication table
+        System.out.println("Multiplication Table:");
+        for (int m = 1; m <= 10; m++) {
+            for (int l = 1; l <= 10; l++) {
+                System.out.print(m * l + "\t"); // Print the product with a tab space
+            }
+            System.out.println(); // New line after each row
    
     }
     
+}
 }
