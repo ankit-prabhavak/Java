@@ -1,6 +1,7 @@
 package Practice;
 
 public class pattern {
+
     public static void main(String[] args) {
         int n = 5; // Number of rows for the pattern
 
