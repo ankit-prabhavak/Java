@@ -1,0 +1,36 @@
+A method is a block of code or collection of statements that performs a specific task.
+It is used to achieve the reusability of code.
+
+Components of the method:
+
+HEADER BLOCK-
+
+Access specifier:
+The access specifier is used to specify the accessibility of the method. It can be public, private, or protected.
+
+Return Type:
+The return type is the data type of the value that the method returns.
+
+Method Name:
+The method name is the name given to the method.
+
+Parameter List:
+The parameter list is a list of variables that are passed to the method. It can be empty or contain one or more variables.
+
+Example:
+java
+public class MyClass {
+    public static void main(String[] args) {
+        int x = 10;
+        int y = 20;
+        int sum = add(x, y);
+        }
+        public static int add(int a, int b) {
+            int result = a + b;
+            return result;
+            }
+}
+
+
+
+
