@@ -58,6 +58,19 @@ public class LearnString {
         jaanu = jaanu.replace('A', 'a'); // Replacing 'A' with 'a'
         System.out.println(jaanu); // ankita
 
+        char letters[] = name.toCharArray(); // Convert string to char array
+        System.out.println("Character array:");
+        for (char letter : letters) {
+            System.out.print(letter + " "); // Print each character
+        }
+        System.out.println();
+
+        String emp = "";
+        System.out.println(emp.isEmpty());
+        System.out.println(emp.isBlank()); // Check if the string is empty or blank
+
+        
+
 
         sc.close();
 
