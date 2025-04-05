@@ -21,6 +21,11 @@ public class MainClass {
         System.out.print("Complex Number: ");
         complexNumber.display();
 
+        ComplexNumber complexNumber2 = new ComplexNumber(1.0, 2.0);
+        ComplexNumber sum = complexNumber.add(complexNumber2);
+        System.out.print("Sum of Complex Numbers: ");
+        sum.display();
+
        
 
         
@@ -42,7 +47,11 @@ class ComplexNumber{
             System.out.println(real + " + " + imaginary + "i");
         }
 
-    }
+        ComplexNumber add(ComplexNumber other) {
+            return new ComplexNumber(this.real + other.real, this.imaginary + other.imaginary);
+        }
+
+}
 
 
 class Dog{
