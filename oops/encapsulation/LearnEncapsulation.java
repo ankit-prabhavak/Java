@@ -1,11 +1,10 @@
 package oops.encapsulation;
 
-import oops.encapsulation.Person;  // This is a block
 
-public class Main{
+public class LearnEncapsulation{
     public static void main(String[] args) {  // This is a block
 
-        Person person = new Person("John Doe", 30);  // This is a block
+        Persona person = new Persona("John Doe", 30);  // This is a block
 
 
         
