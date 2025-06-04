@@ -70,8 +70,6 @@ public class LearnString {
         System.out.println(emp.isBlank()); // Check if the string is empty or blank
 
         
-
-
         sc.close();
 
     }

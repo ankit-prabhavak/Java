@@ -15,7 +15,7 @@ public class basic {
         System.out.println(ages[2]);
 
 
-
+        
         int[] umar = new int[5];
 
         System.out.println(umar.length); // length of array
