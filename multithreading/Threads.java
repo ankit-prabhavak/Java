@@ -1,63 +1,86 @@
 package multithreading;
 
-// Multithreading allows multiple threads to run concurrently in a program.
-// It is mainly used to perform multiple tasks simultaneously for better performance.
+/**
+ * Multithreading in Java: Concepts, Implementation, Advantages, and Disadvantages
+ * ------------------------------------------------------------------------------
+ * Multithreading allows multiple threads to run concurrently, enabling efficient CPU utilization,
+ * faster program execution, and responsive applications. Each thread is a lightweight sub-process
+ * sharing the same memory space but running independently.
+ *
+ * Key Concepts:
+ * - Thread: A unit of execution within a process.
+ * - Thread Life Cycle: The various states a thread can be in during its lifetime.
+ * - Creating Threads: By extending Thread or implementing Runnable.
+ * - Thread Priorities: Influence thread scheduling (not guaranteed by JVM).
+ * - Synchronization: Prevents race conditions by allowing only one thread in a critical section.
+ * - Inter-thread Communication: Coordination between threads using wait(), notify(), notifyAll().
+ *
+ * Advantages:
+ * - Better CPU utilization.
+ * - Faster program execution for independent tasks.
+ * - Improved application responsiveness (e.g., UI apps).
+ * - Simplifies modeling of real-world concurrent activities.
+ *
+ * Disadvantages:
+ * - Increased complexity (harder to debug and maintain).
+ * - Risk of race conditions and deadlocks if not handled properly.
+ * - Context switching overhead.
+ * - Unpredictable thread scheduling (platform/JVM dependent).
+ */
 
 class MyThread extends Thread {
-    // This class extends Thread and overrides run() to define task for the thread
-
+    // Extending Thread class to create a custom thread.
+    // Use this method if you don't need to extend another class.
     public void run() {
-        // run() method is the entry point of a thread.
         for (int i = 1; i <= 5; i++) {
-            System.out.println("From MyThread: " + i);
+            System.out.println(getName() + " (MyThread) Count: " + i);
             try {
-                Thread.sleep(500); // Sleep for 500ms to simulate delay
+                Thread.sleep(500); // Simulate work and allow context switching
             } catch (InterruptedException e) {
-                System.out.println("MyThread interrupted.");
+                System.out.println(getName() + " interrupted.");
             }
         }
     }
 }
 
-// Creating thread by implementing Runnable interface
 class MyRunnable implements Runnable {
-    // Runnable is preferred when extending from another class is needed
+    // Implementing Runnable interface (preferred if you need to extend another class).
     public void run() {
         for (int i = 1; i <= 5; i++) {
-            System.out.println("From MyRunnable: " + i);
+            System.out.println(Thread.currentThread().getName() + " (MyRunnable) Count: " + i);
             try {
-                Thread.sleep(700); // Sleep for 700ms
+                Thread.sleep(700);
             } catch (InterruptedException e) {
-                System.out.println("MyRunnable interrupted.");
+                System.out.println(Thread.currentThread().getName() + " interrupted.");
             }
         }
     }
 }
 
 class SharedResource {
-    // A shared resource that needs synchronization
+    // Shared resource demonstrating synchronization.
     synchronized void printCount() {
-        // synchronized ensures that only one thread accesses this method at a time
+        // Only one thread can execute this method at a time.
         for (int i = 1; i <= 3; i++) {
-            System.out.println(Thread.currentThread().getName() + " Count: " + i);
+            System.out.println(Thread.currentThread().getName() + " (Sync) Count: " + i);
             try {
                 Thread.sleep(400);
             } catch (InterruptedException e) {
-                System.out.println("Thread interrupted.");
+                System.out.println(Thread.currentThread().getName() + " interrupted.");
             }
         }
     }
 }
 
-// For inter-thread communication using wait() and notify()
 class InterThread {
+    // Demonstrates inter-thread communication using wait() and notify().
     int data;
     boolean hasValue = false;
 
     synchronized void produce(int value) {
         while (hasValue) {
             try {
-                wait(); // wait if data is already produced
+                wait(); // Wait until value is consumed
             } catch (InterruptedException e) {
                 System.out.println("Producer interrupted.");
             }
@@ -65,20 +88,20 @@ class InterThread {
         data = value;
         hasValue = true;
         System.out.println("Produced: " + data);
-        notify(); // notify waiting consumer
+        notify(); // Notify consumer
     }
 
     synchronized void consume() {
         while (!hasValue) {
             try {
-                wait(); // wait until data is produced
+                wait(); // Wait until value is produced
             } catch (InterruptedException e) {
                 System.out.println("Consumer interrupted.");
             }
         }
         System.out.println("Consumed: " + data);
         hasValue = false;
-        notify(); // notify producer to produce next item
+        notify(); // Notify producer
     }
 }
 
@@ -86,27 +109,24 @@ public class Threads {
 
     public static void main(String[] args) {
         System.out.println("=== Thread Creation Using Thread Class ===");
-        MyThread t1 = new MyThread(); // Create thread object
+        MyThread t1 = new MyThread();
         t1.setName("Thread-One");
-        t1.setPriority(Thread.MAX_PRIORITY); // Set high priority (1 to 10)
-        t1.start(); // start() invokes run() in a new thread
+        t1.setPriority(Thread.MAX_PRIORITY); // Priority: 10 (highest)
+        t1.start(); // start() creates a new thread and calls run() internally
 
         System.out.println("=== Thread Creation Using Runnable Interface ===");
         Thread t2 = new Thread(new MyRunnable(), "Runnable-Thread");
-        t2.setPriority(Thread.MIN_PRIORITY); // Set low priority
+        t2.setPriority(Thread.MIN_PRIORITY); // Priority: 1 (lowest)
         t2.start();
 
-        // Thread Life Cycle (New, Runnable, Running, Blocked, Terminated)
-        // start() -> thread becomes Runnable
-        // JVM picks the thread -> Running
-        // sleep(), wait(), I/O -> Blocked
-        // run() ends -> Terminated
+        // Thread Life Cycle:
+        // New -> Runnable (after start()) -> Running (when scheduled by JVM)
+        // -> Blocked/Waiting (sleep(), wait(), I/O) -> Terminated (run() ends)
 
         System.out.println("=== Synchronization Example ===");
         SharedResource shared = new SharedResource();
         Thread sync1 = new Thread(() -> shared.printCount(), "SyncThread-1");
         Thread sync2 = new Thread(() -> shared.printCount(), "SyncThread-2");
-
         sync1.start();
         sync2.start();
 
@@ -122,7 +142,7 @@ public class Threads {
                     System.out.println("Producer thread interrupted.");
                 }
             }
-        });
+        }, "Producer");
 
         Thread consumer = new Thread(() -> {
             for (int i = 1; i <= 5; i++) {
@@ -133,28 +153,50 @@ public class Threads {
                     System.out.println("Consumer thread interrupted.");
                 }
             }
-        });
+        }, "Consumer");
 
         producer.start();
         consumer.start();
 
-        // Summary:
-        // Thread can be created by extending Thread or implementing Runnable.
-        // start() starts a new thread; run() just calls the method in current thread.
-        // setPriority(int) affects thread scheduling (not guaranteed).
-        // Synchronization prevents race conditions.
-        // Inter-thread communication allows coordination using wait() and notify().
+        // Summary of Concepts:
+        // - Thread can be created by extending Thread or implementing Runnable.
+        // - start() creates a new thread; run() only runs in the current thread.
+        // - setPriority(int) can hint scheduling, but is not guaranteed.
+        // - Synchronization (synchronized keyword) prevents race conditions.
+        // - Inter-thread communication (wait/notify) allows coordination.
     }
 }
 
-
 /*
-Concept	Description
-Thread	A thread is a lightweight sub-process that runs concurrently with other threads.
-Thread Life Cycle	New → Runnable → Running → Blocked/Waiting → Terminated
-Creating Threads	Using extends Thread or implements Runnable
-start() vs run()	start() creates a new thread and calls run() internally.
-Thread Priorities	Range: MIN_PRIORITY (1), NORM_PRIORITY (5), MAX_PRIORITY (10)
-Synchronization	Ensures that only one thread accesses critical section at a time.
-wait() / notify()	Used for communication between threads to coordinate actions.
- */
+==================== Multithreading Concepts ====================
+
+Concept                | Description
+-----------------------|----------------------------------------------------------
+Thread                 | A lightweight sub-process running concurrently.
+Thread Life Cycle      | New → Runnable → Running → Blocked/Waiting → Terminated
+Creating Threads       | By extending Thread or implementing Runnable interface.
+start() vs run()       | start() creates a new thread and calls run(); run() alone runs in current thread.
+Thread Priorities      | MIN_PRIORITY (1), NORM_PRIORITY (5), MAX_PRIORITY (10)
+Synchronization        | Ensures only one thread accesses a critical section at a time.
+wait() / notify()      | Used for communication and coordination between threads.
+
+==================== Advantages of Multithreading ===============
+- Efficient CPU utilization.
+- Faster execution for independent tasks.
+- Improved responsiveness (especially in GUIs).
+- Simplifies modeling of concurrent activities.
+
+==================== Disadvantages of Multithreading ============
+- Increased program complexity.
+- Risk of race conditions and deadlocks.
+- Harder to debug and maintain.
+- Overhead due to context switching.
+- Unpredictable scheduling (platform/JVM dependent).
+
+==================== How Multithreading Works ===================
+- JVM manages thread scheduling and context switching.
+- Threads share the same memory space but have their own call stack.
+- Synchronization is needed for shared resources to avoid data inconsistency.
+- Inter-thread communication (wait/notify) is used for coordination.
+
+*/

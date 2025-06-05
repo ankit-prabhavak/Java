@@ -6,6 +6,210 @@ import java.util.Base64;
 import java.util.stream.*;
 import java.lang.annotation.*;
 
+/**
+ * Java New Features: Concepts and Examples
+ * ----------------------------------------
+ * This file summarizes and demonstrates key new features introduced in modern Java versions.
+ *
+ * Covered Topics:
+ * - Functional Interfaces
+ * - Lambda Expressions
+ * - Method References
+ * - Stream API
+ * - Default Methods in Interfaces
+ * - Static Methods in Interfaces
+ * - Base64 Encoding and Decoding
+ * - forEach Method
+ * - Try-with-resources
+ * - Type Annotations
+ * - Repeating Annotations
+ * - Java Module System
+ * - Diamond Syntax with Inner Anonymous Class
+ * - Local Variable Type Inference (var)
+ * - Switch Expressions
+ * - Yield Keyword
+ * - Text Blocks
+ * - Records
+ * - Sealed Classes
+ *
+ * ---------------------------------------------------------------------------
+ * 1. Functional Interfaces
+ * ---------------------------------------------------------------------------
+ * - An interface with exactly one abstract method (can have default/static methods).
+ * - Used as the basis for lambda expressions and method references.
+ *
+ * Example:
+ *   @FunctionalInterface
+ *   interface MyFunctionalInterface {
+ *       void display();
+ *       default void defaultMethod() { ... }
+ *   }
+ *
+ * ---------------------------------------------------------------------------
+ * 2. Lambda Expressions
+ * ---------------------------------------------------------------------------
+ * - Provide a concise way to implement functional interfaces.
+ * - Syntax: (parameters) -> expression or { statements }
+ *
+ * Example:
+ *   MyFunctionalInterface lambdaDemo = () -> System.out.println("Lambda Expression Executed");
+ *
+ * ---------------------------------------------------------------------------
+ * 3. Method References
+ * ---------------------------------------------------------------------------
+ * - Refer to methods by name using ::
+ * - Syntax: ClassName::methodName or object::methodName
+ *
+ * Example:
+ *   static void greet() { ... }
+ *   MyFunctionalInterface ref = AllFeatures::greet;
+ *
+ * ---------------------------------------------------------------------------
+ * 4. Stream API
+ * ---------------------------------------------------------------------------
+ * - Functional-style operations on collections (filter, map, reduce, etc.).
+ * - Allows parallel and declarative processing.
+ *
+ * Example:
+ *   names.stream().filter(n -> n.startsWith("A")).forEach(System.out::println);
+ *
+ * ---------------------------------------------------------------------------
+ * 5. Default Methods in Interfaces
+ * ---------------------------------------------------------------------------
+ * - Interfaces can have default method implementations.
+ *
+ * Example:
+ *   interface DefaultDemo { default void show() { ... } }
+ *
+ * ---------------------------------------------------------------------------
+ * 6. Static Methods in Interfaces
+ * ---------------------------------------------------------------------------
+ * - Interfaces can have static methods (called with InterfaceName.method()).
+ *
+ * Example:
+ *   interface StaticMethodDemo { static void staticShow() { ... } }
+ *
+ * ---------------------------------------------------------------------------
+ * 7. Base64 Encoding and Decoding
+ * ---------------------------------------------------------------------------
+ * - Encode and decode data to/from Base64 using java.util.Base64.
+ *
+ * Example:
+ *   String encoded = Base64.getEncoder().encodeToString(original.getBytes());
+ *   String decoded = new String(Base64.getDecoder().decode(encoded));
+ *
+ * ---------------------------------------------------------------------------
+ * 8. forEach Method
+ * ---------------------------------------------------------------------------
+ * - forEach() is used to iterate over collections with lambda or method reference.
+ *
+ * Example:
+ *   names.forEach(System.out::println);
+ *
+ * ---------------------------------------------------------------------------
+ * 9. Try-with-resources
+ * ---------------------------------------------------------------------------
+ * - Automatically closes resources (like files) after use.
+ *
+ * Example:
+ *   try (BufferedReader br = new BufferedReader(new FileReader("test.txt"))) { ... }
+ *
+ * ---------------------------------------------------------------------------
+ * 10. Type Annotations
+ * ---------------------------------------------------------------------------
+ * - Annotations can be applied to types (e.g., List<@NonNull String>).
+ *
+ * Example:
+ *   @Target({ElementType.TYPE_USE}) @interface NonNull {}
+ *   List<@NonNull String> safeList = new ArrayList<>();
+ *
+ * ---------------------------------------------------------------------------
+ * 11. Repeating Annotations
+ * ---------------------------------------------------------------------------
+ * - The same annotation can be applied multiple times to the same element.
+ *
+ * Example:
+ *   @Hint("hint1") @Hint("hint2") class Person {}
+ *
+ * ---------------------------------------------------------------------------
+ * 12. Java Module System (Java 9)
+ * ---------------------------------------------------------------------------
+ * - Projects can be split into modules with explicit dependencies.
+ *
+ * Example:
+ *   // module-info.java
+ *   module my.module.name { requires java.base; exports my.package; }
+ *
+ * ---------------------------------------------------------------------------
+ * 13. Diamond Syntax with Inner Anonymous Class
+ * ---------------------------------------------------------------------------
+ * - The diamond operator <> can be used with anonymous classes.
+ *
+ * Example:
+ *   Demo d = new Demo() { ... };
+ *
+ * ---------------------------------------------------------------------------
+ * 14. Local Variable Type Inference (var)
+ * ---------------------------------------------------------------------------
+ * - The var keyword lets the compiler infer the type of local variables.
+ *
+ * Example:
+ *   var num = 100; var list = List.of("Java", "Python");
+ *
+ * ---------------------------------------------------------------------------
+ * 15. Switch Expressions (Java 12)
+ * ---------------------------------------------------------------------------
+ * - Switch can return a value and use arrow syntax.
+ *
+ * Example:
+ *   String result = switch (day) { case 1 -> "Monday"; ... };
+ *
+ * ---------------------------------------------------------------------------
+ * 16. Yield Keyword (Java 13)
+ * ---------------------------------------------------------------------------
+ * - Used in switch expressions to return a value from a block.
+ *
+ * Example:
+ *   String msg = switch (day) { case 1 -> { yield "It's Monday!"; } ... };
+ *
+ * ---------------------------------------------------------------------------
+ * 17. Text Blocks (Java 13)
+ * ---------------------------------------------------------------------------
+ * - Multi-line string literals using triple quotes.
+ *
+ * Example:
+ *   String json = """
+ *       {
+ *           "name": "Ankit"
+ *       }
+ *       """;
+ *
+ * ---------------------------------------------------------------------------
+ * 18. Records (Java 16)
+ * ---------------------------------------------------------------------------
+ * - Concise syntax for classes that are pure data carriers.
+ *
+ * Example:
+ *   record Student(String name, int age) {}
+ *
+ * ---------------------------------------------------------------------------
+ * 19. Sealed Classes (Java 17)
+ * ---------------------------------------------------------------------------
+ * - Restrict which classes can extend or implement a class/interface.
+ *
+ * Example:
+ *   sealed class Vehicle permits Car, Bike {}
+ *   final class Car extends Vehicle {}
+ *   final class Bike extends Vehicle {}
+ *
+ * ---------------------------------------------------------------------------
+ * Advantages:
+ * - More concise, readable, and maintainable code.
+ * - Improved performance and safety.
+ * - Modern programming paradigms (functional, modular, etc.).
+ */
+
+
 public class AllFeatures {
 
     // ============================================

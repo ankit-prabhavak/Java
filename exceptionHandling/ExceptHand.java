@@ -142,3 +142,44 @@ throw	Used to manually throw an exception object.
 throws	Used to declare that a method might throw an exception.
 User-defined Exception	Extend Exception or RuntimeException to create custom rules.
  */
+
+
+ /*
+Here are more examples of checked exceptions, unchecked exceptions, and errors in Java:
+
+Checked Exceptions (must be handled or declared)
+IOException
+FileNotFoundException
+SQLException
+ClassNotFoundException
+InterruptedException
+ParseException
+NoSuchMethodException
+InstantiationException
+IllegalAccessException
+InvocationTargetException
+
+Unchecked Exceptions (Runtime Exceptions, optional to handle)
+ArithmeticException
+NullPointerException
+ArrayIndexOutOfBoundsException
+NumberFormatException
+IllegalArgumentException
+IllegalStateException
+ClassCastException
+IndexOutOfBoundsException
+NegativeArraySizeException
+UnsupportedOperationException
+StringIndexOutOfBoundsException
+
+Errors (serious problems, not meant to be caught)
+StackOverflowError
+OutOfMemoryError
+VirtualMachineError
+NoClassDefFoundError
+AssertionError
+ExceptionInInitializerError
+LinkageError
+InternalError
+
+  */

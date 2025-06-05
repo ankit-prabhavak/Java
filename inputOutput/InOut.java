@@ -2,7 +2,15 @@ package inputOutput;
 
 import java.io.*;
 
-// Input/Output Basics in Java
+/**
+ * Input/Output (I/O) Basics in Java
+ * ---------------------------------
+ * Java provides two main types of streams for file I/O:
+ * 1. Byte Streams: For handling raw binary data (images, audio, etc.)
+ * 2. Character Streams: For handling character data (text files)
+ *
+ * This class demonstrates both types with definitions, comments, and examples.
+ */
 public class InOut {
 
     public static void main(String[] args) {
@@ -10,20 +18,26 @@ public class InOut {
         String byteFilePath = "byteData.txt";
         String charFilePath = "charData.txt";
 
-        // Demonstrating Byte Stream
+        // Demonstrating Byte Stream (for binary or text data)
         writeUsingByteStream(byteFilePath);
         readUsingByteStream(byteFilePath);
 
-        // Demonstrating Character Stream
+        // Demonstrating Character Stream (for text data)
         writeUsingCharStream(charFilePath);
         readUsingCharStream(charFilePath);
     }
 
     // ================= BYTE STREAM ====================
     /*
-     * Byte Stream handles raw binary data (image, audio, text files etc.)
-     * It uses classes from java.io package like FileInputStream and FileOutputStream
-     * Ideal for binary files and low-level data handling
+     * Byte Streams handle raw binary data (such as images, audio, or any file).
+     * They use classes from java.io package like FileInputStream and FileOutputStream.
+     * Byte streams are best for binary files and low-level data handling.
+     * Each byte is read/written as an 8-bit value.
+     */
+
+    /**
+     * Writes data to a file using FileOutputStream (Byte Stream).
+     * @param filePath Path to the file where data will be written.
      */
     public static void writeUsingByteStream(String filePath) {
         try {
@@ -39,6 +53,10 @@ public class InOut {
         }
     }
 
+    /**
+     * Reads data from a file using FileInputStream (Byte Stream).
+     * @param filePath Path to the file to be read.
+     */
     public static void readUsingByteStream(String filePath) {
         try {
             // FileInputStream reads byte data from a file
@@ -57,15 +75,22 @@ public class InOut {
 
     // =============== CHARACTER STREAM ==================
     /*
-     * Character Stream handles character data (text files)
-     * It uses classes like FileReader and FileWriter
-     * Ideal for reading/writing characters, arrays, or strings
+     * Character Streams handle character data (text files).
+     * They use classes like FileReader and FileWriter.
+     * Character streams are best for reading/writing characters, arrays, or strings.
+     * Each character is read/written as a 16-bit Unicode value.
+     */
+
+    /**
+     * Writes data to a file using FileWriter (Character Stream).
+     * @param filePath Path to the file where data will be written.
      */
     public static void writeUsingCharStream(String filePath) {
         try {
             // FileWriter writes character data to file
             FileWriter fw = new FileWriter(filePath);
             fw.write("This is written using Character Stream.\n");
+            fw.write("Character streams are best for text files.\n");
             fw.close();
             System.out.println("Character Stream: Data written successfully.");
         } catch (IOException e) {
@@ -73,6 +98,10 @@ public class InOut {
         }
     }
 
+    /**
+     * Reads data from a file using FileReader (Character Stream).
+     * @param filePath Path to the file to be read.
+     */
     public static void readUsingCharStream(String filePath) {
         try {
             // FileReader reads character data from file
@@ -91,12 +120,21 @@ public class InOut {
 }
 
 /*
-Topic	Description
-Byte Streams	Used to read/write raw bytes. Classes: FileInputStream, FileOutputStream. Best for binary files.
-Character Streams	Used to read/write characters. Classes: FileReader, FileWriter. Best for text files.
-FileInputStream	Reads byte data from a file one byte at a time.
-FileOutputStream	Writes byte data to a file using byte arrays.
-FileReader	Reads character data from file, one character at a time.
-FileWriter	Writes characters, arrays, or strings to a file.
-IOExceptions	Always handle file operations with try-catch for safety and debugging.
+==================== SUMMARY TABLE ====================================================
+
+| Stream Type      | Classes Used                | Best For           | Data Unit     |
+|------------------|-----------------------------|--------------------|---------------|
+| Byte Stream      | FileInputStream,            | Binary files,      | 8-bit bytes   |
+|                  | FileOutputStream            | images, audio      |               |
+| Character Stream | FileReader, FileWriter      | Text files         | 16-bit chars  |
+
+==================== KEY POINTS =======================================================
+
+- Byte Streams: Use for any file type, especially binary. Reads/writes bytes.
+- Character Streams: Use for text files. Reads/writes characters.
+- Always handle file I/O with try-catch for safety.
+- Streams must be closed after use to free resources.
+- FileInputStream/FileOutputStream: Read/write bytes.
+- FileReader/FileWriter: Read/write characters.
+
 */
