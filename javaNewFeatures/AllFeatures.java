@@ -467,3 +467,32 @@ public class AllFeatures {
         StaticMethodDemo.staticShow();
     }
 }
+/*
+ * // Step 1: Create a class with a constructor
+class Student {
+    String name;
+
+    Student(String name) {
+        this.name = name;
+        System.out.println("Constructor called. Name is: " + name);
+    }
+}
+
+// Step 2: Create a functional interface with a method that matches the constructor
+interface StudentCreator {
+    Student create(String name);
+}
+
+// Step 3: Use constructor reference
+public class Main {
+    public static void main(String[] args) {
+        // Constructor reference using ::new
+        StudentCreator sc = Student::new;
+
+        // Call the method which will internally call the constructor
+        Student s1 = sc.create("Ankit");
+    }
+}
+
+ * 
+ */
