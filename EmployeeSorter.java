@@ -20,15 +20,27 @@ class Employee implements Comparable<Employee> {
         return salary;
     }
 
-    // compareTo method to sort by salary
     @Override
-    public int compareTo(Employee other) {
-        // If salaries are equal, sort by name to avoid duplicates in TreeSet
-        if (this.salary == other.salary) {
-            return this.name.compareTo(other.name);
-        }
-        return Double.compare(this.salary, other.salary);
+public int compareTo(Employee other) {
+    // TreeSet uses compareTo() to decide order and uniqueness.
+    // If this method returns 0, TreeSet treats the two objects as duplicates.
+
+    // First, compare salaries
+    if (this.salary == other.salary) {
+        // If salaries are the same, compare by names to break the tie.
+        // This ensures that employees with the same salary but different names
+        // are treated as distinct and sorted alphabetically.
+        return this.name.compareTo(other.name);
     }
+
+    // If salaries are different, compare by salary in ascending order.
+    // Double.compare handles precision and returns:
+    //   < 0 if this.salary < other.salary
+    //   = 0 if this.salary == other.salary
+    //   > 0 if this.salary > other.salary
+    return Double.compare(this.salary, other.salary);
+}
+
 
     // toString for easy display
     @Override
@@ -56,3 +68,5 @@ public class EmployeeSorter {
         }
     }
 }
+
+
